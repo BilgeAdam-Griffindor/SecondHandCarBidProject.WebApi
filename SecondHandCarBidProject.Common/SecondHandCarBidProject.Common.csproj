@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Extension\" />
-    <Folder Include="Validation\" />
+    <Compile Remove="Extension\**" />
+    <Compile Remove="Validation\**" />
+    <EmbeddedResource Remove="Extension\**" />
+    <EmbeddedResource Remove="Validation\**" />
+    <None Remove="Extension\**" />
+    <None Remove="Validation\**" />
   </ItemGroup>
 
   <ItemGroup>
