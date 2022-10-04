@@ -16,4 +16,14 @@
     <ProjectReference Include="..\SecondHandCarBidProject.Common\SecondHandCarBidProject.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstract\" />
+    <Folder Include="Concrete\" />
+    <Folder Include="Context\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.17.1" />
+  </ItemGroup>
+
 </Project>
