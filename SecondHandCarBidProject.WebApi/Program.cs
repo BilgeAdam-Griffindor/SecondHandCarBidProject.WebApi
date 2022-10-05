@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using SecondHandCarBidProject.Business.Extensions;
+using SecondHandCarBidProject.Business.Middlewares;
 using System.Text;
 
 
@@ -47,6 +48,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseMiddleware<UserActionLogMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();
