@@ -1,4 +1,5 @@
-﻿using SecondHandCarBidProject.Log.Abstract;
+﻿using SecondHandCarBidProject.DataAccess.Mongo.MongoModels;
+using SecondHandCarBidProject.Log.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace SecondHandCarBidProject.Logs.Concrete
 {
-    public class MssqlDatabaseLog<T> : ILogger<T> where T : class
+    public class MssqlDatabaseLog:ILogger
     {
-        public async Task DataLog(T data)
+        public async Task DataLog(MongoLogModel data)
         {
             throw new NotImplementedException();
         }

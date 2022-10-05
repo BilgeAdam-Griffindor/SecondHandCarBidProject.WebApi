@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SecondHandCarBidProject.Log.Abstract
+namespace SecondHandCarBidProject.DataAccess.Mongo.Abstract
 {
-    public interface ILogger
+    public interface IMongoLog
     {
-         Task DataLog(MongoLogModel data);
-
+        Task<bool> AddLogToMongo(MongoLogModel log);
     }
 }

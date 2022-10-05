@@ -1,4 +1,7 @@
-﻿using SecondHandCarBidProject.Log.Abstract;
+﻿using SecondHandCarBidProject.DataAccess.Mongo.Abstract;
+using SecondHandCarBidProject.DataAccess.Mongo.Concrete;
+using SecondHandCarBidProject.DataAccess.Mongo.MongoModels;
+using SecondHandCarBidProject.Log.Abstract;
 using SecondHandCarBidProject.Logs.Concrete;
 using System;
 using System.Collections.Generic;
@@ -8,8 +11,7 @@ using System.Threading.Tasks;
 
 namespace SecondHandCarBidProject.Log.Concrete
 {
-    public class LoggerFactory<T>
-        where T : class
+    public class LoggerFactory
     {
         public enum LoggerType
         {
@@ -17,16 +19,19 @@ namespace SecondHandCarBidProject.Log.Concrete
             MssqlDataBaseLogger=2,
             FileLogger = 3,
         }
-        public async Task FactoryMethod(LoggerType logType, T data)
+        public async Task FactoryMethod(LoggerType logType, MongoLogModel data,IMongoLog mongo)
         {
-            ILogger<T> log = null;
+            ILogger log = null;
             switch (logType)
             {
                 case LoggerType.MongoDatabaseLogger:
-                    log = new MongoDatabaseLog<T>();
+                    log = new MongoDatabaseLog(mongo);
                     break;
                 case LoggerType.MssqlDataBaseLogger:
-                    log = new MssqlDatabaseLog<T>();
+                    log = new MssqlDatabaseLog();
+                    break;
+                case LoggerType.FileLogger:
+                    log = new FileLogger();
                     break;
                 default:
                     break;

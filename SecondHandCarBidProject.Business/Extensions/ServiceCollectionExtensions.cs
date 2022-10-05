@@ -1,7 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SecondHandCarBidProject.DataAccess.Concrete;
 using SecondHandCarBidProject.DataAccess.Interface;
+using SecondHandCarBidProject.DataAccess.Mongo;
+using SecondHandCarBidProject.DataAccess.Mongo.Abstract;
+using SecondHandCarBidProject.DataAccess.Mongo.Concrete;
+using SecondHandCarBidProject.DataAccess.Mongo.MongoModels;
 
 namespace SecondHandCarBidProject.Business.Extensions
 {
@@ -9,6 +14,10 @@ namespace SecondHandCarBidProject.Business.Extensions
     {
         public static void AddServices(this IServiceCollection services, IConfiguration configuration)
         {
+            // Settings
+            services.Configure<MongoSettings>(configuration.GetSection("MongoSettings"));
+            //DPI
+            services.AddSingleton<IMongoLog, MongoLog>();
             services.AddScoped<IUserDAL, UserDAL>();
 
         }
