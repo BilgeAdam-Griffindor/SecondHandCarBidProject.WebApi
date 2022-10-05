@@ -5,6 +5,6 @@ namespace SecondHandCarBidProject.DataAccess.Interface
     public interface IUserDAL
     {
         //esranın vereceği tipi dönecek...
-        Task<string> Authenticate(TokenUserRequestDTO req);
+        Task<ExampleDTO> Authenticate(TokenUserRequestDTO req);
     }
 }
