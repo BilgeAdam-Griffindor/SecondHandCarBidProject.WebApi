@@ -12,5 +12,11 @@ namespace SecondHandCarBidProject.WebApi.Controllers
     [ApiController]
     public class AdminCarController : ControllerBase
     {
+        [Authorize]
+        [HttpGet("GetDataForCarListPage")]
+        public void GetDataForCarListPage(int? brandId = null, int? modelId = null, int? statusId = null, int page = 1, int itemPerPage = 100)
+        {
+
+        }
     }
 }
