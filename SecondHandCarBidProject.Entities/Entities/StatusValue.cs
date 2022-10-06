@@ -12,7 +12,7 @@ namespace SecondHandCarBidProject.Entities.Entities
         public StatusValue()
         {
             BidStatusHistories = new HashSet<BidStatusHistory>();
-            CarBuyHistories = new HashSet<CarBuyHistory>();
+            CarBuyStatusHistories = new HashSet<CarBuyStatusHistory>();
             CarStatusHistories = new HashSet<CarStatusHistory>();
             TrafficInsuranceTrafficInsuranceCarComponents = new HashSet<TrafficInsuranceTrafficInsuranceCarComponent>();
         }
@@ -31,7 +31,7 @@ namespace SecondHandCarBidProject.Entities.Entities
         public virtual ICollection<BidStatusHistory> BidStatusHistories { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CarBuyHistory> CarBuyHistories { get; set; }
+        public virtual ICollection<CarBuyStatusHistory> CarBuyStatusHistories { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarStatusHistory> CarStatusHistories { get; set; }
