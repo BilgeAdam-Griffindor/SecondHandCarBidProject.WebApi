@@ -18,6 +18,7 @@ namespace SecondHandCarBidProject.Business.Extensions
             services.Configure<MongoSettings>(configuration.GetSection("MongoSettings"));
             //DPI
             services.AddSingleton<IMongoLog, MongoLog>();
+            services.AddSingleton<IMongoEmailPasswordToken, MongoEmailPasswordToken>();
             services.AddScoped<IUserDAL, UserDAL>();
 
         }

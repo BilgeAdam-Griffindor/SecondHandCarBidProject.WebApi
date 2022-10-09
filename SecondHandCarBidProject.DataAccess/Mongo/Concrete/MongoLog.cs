@@ -19,7 +19,7 @@ namespace SecondHandCarBidProject.DataAccess.Mongo.Concrete
             mongoSettings.ServerApi = new ServerApi(ServerApiVersion.V1);
             var client = new MongoClient(mongoSettings);
             var logForMongoDB = client.GetDatabase(MongoSettings.Value.DatabaseName);
-            _mongoLog = logForMongoDB.GetCollection<MongoLogModel>(MongoSettings.Value.CollectionName);
+            _mongoLog = logForMongoDB.GetCollection<MongoLogModel>(MongoSettings.Value.LogCollection);
         }
         public async Task<bool> AddLogToMongo(MongoLogModel log)
         {
