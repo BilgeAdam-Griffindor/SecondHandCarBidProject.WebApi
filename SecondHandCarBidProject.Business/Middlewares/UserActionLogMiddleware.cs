@@ -35,7 +35,7 @@ namespace SecondHandCarBidProject.Business.Middlewares
             mongoLogModel.BrowserType= httpContext.Request.Headers["User-Agent"].ToString();
             mongoLogModel.CreatedDate= DateTime.Now;
             var bisi=httpContext.User.Claims;
-            var result = loggerFactory.FactoryMethod(LoggerFactory.LoggerType.MongoDatabaseLogger, mongoLogModel, _mongo);
+            var result = loggerFactory.FactoryMethod(LoggerFactory.LoggerType.FileLogger, mongoLogModel, _mongo);
             await _next(httpContext);
         }
     }
