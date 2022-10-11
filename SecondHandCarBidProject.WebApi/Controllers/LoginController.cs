@@ -17,6 +17,7 @@ namespace SecondHandCarBidProject.WebApi.Controllers
             _userDAL = userDAL;
         }
         [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> Authenticate([FromBody] TokenUserRequestDTO req)
         {
             if (req == null)

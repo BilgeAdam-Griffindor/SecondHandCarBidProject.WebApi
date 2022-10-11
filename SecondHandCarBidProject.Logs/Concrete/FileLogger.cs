@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace SecondHandCarBidProject.Logs.Concrete
 {
-    public class FileLogger : ILogger
+    public class FileLogger : ILoggerExtension
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         public FileLogger()

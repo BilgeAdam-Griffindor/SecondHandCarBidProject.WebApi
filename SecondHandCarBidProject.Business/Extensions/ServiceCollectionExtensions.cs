@@ -7,6 +7,8 @@ using SecondHandCarBidProject.DataAccess.Mongo;
 using SecondHandCarBidProject.DataAccess.Mongo.Abstract;
 using SecondHandCarBidProject.DataAccess.Mongo.Concrete;
 using SecondHandCarBidProject.DataAccess.Mongo.MongoModels;
+using SecondHandCarBidProject.Log.Concrete;
+using SecondHandCarBidProject.Logs.Abstract;
 
 namespace SecondHandCarBidProject.Business.Extensions
 {
@@ -18,6 +20,7 @@ namespace SecondHandCarBidProject.Business.Extensions
             services.Configure<MongoSettings>(configuration.GetSection("MongoSettings"));
             //DPI
             services.AddSingleton<IMongoLog, MongoLog>();
+            services.AddSingleton<ILoggerFactoryMethod, LoggerFactoryMethod>();
             services.AddSingleton<IMongoEmailPasswordToken, MongoEmailPasswordToken>();
             services.AddScoped<IUserDAL, UserDAL>();
 

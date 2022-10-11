@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SecondHandCarBidProject.Log.Abstract
 {
-    public interface ILogger
+    public interface ILoggerExtension
     {
          Task DataLog(MongoLogModel data);
 

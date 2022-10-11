@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace SecondHandCarBidProject.Log.Concrete
 {
-    public class MongoDatabaseLog : ILogger 
+    public class MongoDatabaseLog : ILoggerExtension 
     {
         IMongoLog mongoLog;
         public MongoDatabaseLog(IMongoLog mongoLog)
