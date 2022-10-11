@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SecondHandCarBidProject.Logs.Concrete
 {
-    public class MssqlDatabaseLog:ILogger
+    public class MssqlDatabaseLog:ILoggerExtension
     {
         public async Task DataLog(MongoLogModel data)
         {
