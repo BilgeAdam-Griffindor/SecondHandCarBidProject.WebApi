@@ -16,8 +16,8 @@ namespace SecondHandCarBidProject.Email.SmtpMail.Services
 {
     public class EmailService: IEmailService
     {
-        //C:\Users\Recai\source\repos\SecondHandCarBidProject.WebApi\SecondHandCarBidProject.Email\EmailTemplates\
-        private const string templatePath = @"SMTP/EmailTemplate/{0}.html";
+        
+        private const string templatePath = @"SMTPMail/EmailTemplate/{0}.html";
         private readonly IConfiguration _configuration;
         public EmailService(IConfiguration configuration)
         {
