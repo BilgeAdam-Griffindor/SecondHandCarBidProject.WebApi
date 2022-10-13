@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecondHandCarBidProject.Com
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecondHandCarBidProject.Logs", "SecondHandCarBidProject.Logs\SecondHandCarBidProject.Logs.csproj", "{503FBC83-B0A6-426C-98A8-3A00787E4A6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecondHandCarBidProject.Business", "SecondHandCarBidProject.Business\SecondHandCarBidProject.Business.csproj", "{4E2A5E34-FDD8-4216-8E12-45BFE41C8F10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecondHandCarBidProject.Business", "SecondHandCarBidProject.Business\SecondHandCarBidProject.Business.csproj", "{4E2A5E34-FDD8-4216-8E12-45BFE41C8F10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecondHandCarBidProject.Email", "SecondHandCarBidProject.Email\SecondHandCarBidProject.Email.csproj", "{848D8705-E722-445D-8B76-5C76CC9FCC41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{4E2A5E34-FDD8-4216-8E12-45BFE41C8F10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E2A5E34-FDD8-4216-8E12-45BFE41C8F10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E2A5E34-FDD8-4216-8E12-45BFE41C8F10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{848D8705-E722-445D-8B76-5C76CC9FCC41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{848D8705-E722-445D-8B76-5C76CC9FCC41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{848D8705-E722-445D-8B76-5C76CC9FCC41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{848D8705-E722-445D-8B76-5C76CC9FCC41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
