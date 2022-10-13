@@ -26,7 +26,7 @@ namespace SecondHandCarBidProject.WebApi.Controllers
             var result = await _userDAL.Authenticate(req);
             if (result == null)
                 return Unauthorized();//if it is null it will return 401(Unauthorized) code
-
+            
             return Ok(result);
         }
     }
