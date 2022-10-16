@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SecondHandCarBidProject.Business.Middlewares;
 using SecondHandCarBidProject.DataAccess.Concrete;
 using SecondHandCarBidProject.DataAccess.Interface;
 using SecondHandCarBidProject.DataAccess.Mongo;
@@ -19,8 +20,8 @@ namespace SecondHandCarBidProject.Business.Extensions
             // Settings
             services.Configure<MongoSettings>(configuration.GetSection("MongoSettings"));
             //DPI
-            services.AddSingleton<IMongoLog, MongoLog>();
-            services.AddSingleton<ILoggerFactoryMethod, LoggerFactoryMethod>();
+            services.AddSingleton<IMongoLog<MongoLogModel>, MongoLog<MongoLogModel>>();
+            services.AddSingleton(typeof(ILoggerFactoryMethod<>), typeof(LoggerFactoryMethod<>));
             services.AddSingleton<IMongoEmailPasswordToken, MongoEmailPasswordToken>();
             services.AddScoped<IUserDAL, UserDAL>();
 

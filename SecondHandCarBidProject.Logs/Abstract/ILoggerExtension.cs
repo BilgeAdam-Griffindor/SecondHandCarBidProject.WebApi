@@ -1,4 +1,5 @@
-﻿using SecondHandCarBidProject.DataAccess.Mongo.MongoModels;
+﻿using SecondHandCarBidProject.DataAccess.Abstract;
+using SecondHandCarBidProject.DataAccess.Mongo.MongoModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace SecondHandCarBidProject.Log.Abstract
 {
-    public interface ILoggerExtension
+    public interface ILoggerExtension<T> where T : class, ILogEntity
     {
-         Task DataLog(MongoLogModel data);
+         Task DataLog(T data);
 
     }
 }

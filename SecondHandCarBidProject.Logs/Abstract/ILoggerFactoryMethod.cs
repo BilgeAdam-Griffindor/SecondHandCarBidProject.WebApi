@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static SecondHandCarBidProject.Log.Concrete.LoggerFactoryMethod;
+using SecondHandCarBidProject.Log.Concrete;
+using SecondHandCarBidProject.DataAccess.Abstract;
 
 namespace SecondHandCarBidProject.Logs.Abstract
 {
-    public interface ILoggerFactoryMethod
+    public interface ILoggerFactoryMethod <T> where T : class, ILogEntity
     {
-        Task FactoryMethod(LoggerType logType, MongoLogModel data);
+        Task FactoryMethod(LoggerFactoryMethod<T>.LoggerType logType, T data);
     }
 }
