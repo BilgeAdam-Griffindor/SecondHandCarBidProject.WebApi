@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using SecondHandCarBidProject.DataAccess.Abstract;
 
 namespace SecondHandCarBidProject.DataAccess.Mongo.MongoModels
 {
-    public class MongoLogModel
+    public class MongoLogModel:ILogEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
