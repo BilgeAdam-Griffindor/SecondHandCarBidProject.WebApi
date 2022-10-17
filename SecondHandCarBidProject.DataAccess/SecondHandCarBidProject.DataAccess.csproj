@@ -20,7 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
+
     <Folder Include="Abstract\" />
+
+    <Folder Include="Concrete\" />
+
     <Folder Include="Context\" />
   </ItemGroup>
 

@@ -40,7 +40,7 @@ namespace SecondHandCarBidProject.Entities.Entities
             CarBuys1 = new HashSet<CarBuy>();
             CarBuyAdditionalFees = new HashSet<CarBuyAdditionalFee>();
             CarBuyAdditionalFees1 = new HashSet<CarBuyAdditionalFee>();
-            CarBuyHistories = new HashSet<CarBuyHistory>();
+            CarBuyStatusHistories = new HashSet<CarBuyStatusHistory>();
             CarCarProperties = new HashSet<CarCarProperty>();
             CarCarProperties1 = new HashSet<CarCarProperty>();
             CarCorporations = new HashSet<CarCorporation>();
@@ -222,7 +222,7 @@ namespace SecondHandCarBidProject.Entities.Entities
         public virtual ICollection<CarBuyAdditionalFee> CarBuyAdditionalFees1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CarBuyHistory> CarBuyHistories { get; set; }
+        public virtual ICollection<CarBuyStatusHistory> CarBuyStatusHistories { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarCarProperty> CarCarProperties { get; set; }

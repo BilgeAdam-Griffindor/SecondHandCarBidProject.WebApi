@@ -31,7 +31,7 @@ namespace SecondHandCarBidProject.Entities.Context
         public virtual DbSet<CarBrand> CarBrands { get; set; }
         public virtual DbSet<CarBuy> CarBuys { get; set; }
         public virtual DbSet<CarBuyAdditionalFee> CarBuyAdditionalFees { get; set; }
-        public virtual DbSet<CarBuyHistory> CarBuyHistories { get; set; }
+        public virtual DbSet<CarBuyStatusHistory> CarBuyStatusHistories { get; set; }
         public virtual DbSet<CarCarProperty> CarCarProperties { get; set; }
         public virtual DbSet<CarCorporation> CarCorporations { get; set; }
         public virtual DbSet<CarFavorite> CarFavorites { get; set; }
@@ -235,7 +235,7 @@ namespace SecondHandCarBidProject.Entities.Context
                 .HasForeignKey(e => e.ModifiedBy);
 
             modelBuilder.Entity<BaseUser>()
-                .HasMany(e => e.CarBuyHistories)
+                .HasMany(e => e.CarBuyStatusHistories)
                 .WithOne(e => e.BaseUser).IsRequired().OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey(e => e.CreatedBy);
 
@@ -560,7 +560,7 @@ namespace SecondHandCarBidProject.Entities.Context
 
 
             modelBuilder.Entity<CarBuy>()
-                .HasMany(e => e.CarBuyHistories)
+                .HasMany(e => e.CarBuyStatusHistories)
                 .WithOne(e => e.CarBuy).IsRequired().OnDelete(DeleteBehavior.NoAction);
 
 
@@ -678,7 +678,7 @@ namespace SecondHandCarBidProject.Entities.Context
 
 
             modelBuilder.Entity<StatusValue>()
-                .HasMany(e => e.CarBuyHistories)
+                .HasMany(e => e.CarBuyStatusHistories)
                 .WithOne(e => e.StatusValue).IsRequired().OnDelete(DeleteBehavior.NoAction);
 
 

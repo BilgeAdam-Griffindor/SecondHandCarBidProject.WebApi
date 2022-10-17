@@ -18,8 +18,10 @@ namespace SecondHandCarBidProject.WebApi.Controllers
             _authDAL = authDAL;
         }
         [AllowAnonymous]
+
         [HttpPost("LoginUser")]
         public async Task<IActionResult> Login([FromBody] TokenUserRequestDTO req)
+
         {
             if (req == null)
                 return BadRequest(new { message = "Kullanıcı adı veya şifre hatalı!" });
@@ -37,7 +39,7 @@ namespace SecondHandCarBidProject.WebApi.Controllers
             var result = await _authDAL.RefreshTokenLoginAsync(refreshToken);
             if (result == null)
                 return Unauthorized();//if it is null it will return 401(Unauthorized) code
-
+            
             return Ok(result);
         }
         [Authorize]

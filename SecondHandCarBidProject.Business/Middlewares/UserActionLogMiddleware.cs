@@ -1,9 +1,12 @@
 ﻿using DnsClient.Internal;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
+using SecondHandCarBidProject.DataAccess.Mongo;
 using SecondHandCarBidProject.DataAccess.Mongo.Abstract;
 using SecondHandCarBidProject.DataAccess.Mongo.MongoModels;
 using SecondHandCarBidProject.Log.Abstract;
 using SecondHandCarBidProject.Log.Concrete;
+using SecondHandCarBidProject.Logs.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,27 +19,24 @@ namespace SecondHandCarBidProject.Business.Middlewares
     public class UserActionLogMiddleware
     {
         private readonly RequestDelegate _next;
-        private IMongoLog _mongo;
-        public UserActionLogMiddleware(RequestDelegate next, IMongoLog mongo)
+        private ILoggerFactoryMethod<MongoLogModel> loggerFactoryMethod;
+        public UserActionLogMiddleware(RequestDelegate next, ILoggerFactoryMethod<MongoLogModel> _loggerfactorymethod,IOptions<MongoSettings> options)
         {
            _next = next;
-            _mongo = mongo;
+            loggerFactoryMethod = _loggerfactorymethod;
 
         }
         public async Task Invoke(HttpContext httpContext)
         {
-            LoggerFactory loggerFactory = new LoggerFactory();
             MongoLogModel mongoLogModel = new MongoLogModel();
-            var bisiler = httpContext.Request;
             mongoLogModel.IpAddress= httpContext.Connection.RemoteIpAddress.ToString();
             mongoLogModel.CreatedDate= DateTime.Now;
             mongoLogModel.ActionType= httpContext.Request.Method;
             mongoLogModel.Url= httpContext.Request.Path;
             mongoLogModel.BrowserType= httpContext.Request.Headers["User-Agent"].ToString();
-            mongoLogModel.CreatedDate= DateTime.Now;
-            var bisi=httpContext.User.Claims;
-            var result = loggerFactory.FactoryMethod(LoggerFactory.LoggerType.MongoDatabaseLogger, mongoLogModel, _mongo);
+            var result =  loggerFactoryMethod.FactoryMethod(LoggerFactoryMethod<MongoLogModel>.LoggerType.FileLogger, mongoLogModel);
             await _next(httpContext);
         }
     }
+  
 }

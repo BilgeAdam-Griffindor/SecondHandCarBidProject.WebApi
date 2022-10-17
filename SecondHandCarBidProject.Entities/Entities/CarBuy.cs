@@ -14,7 +14,7 @@ namespace SecondHandCarBidProject.Entities.Entities
         public CarBuy()
         {
             CarBuyAdditionalFees = new HashSet<CarBuyAdditionalFee>();
-            CarBuyHistories = new HashSet<CarBuyHistory>();
+            CarBuyStatusHistories = new HashSet<CarBuyStatusHistory>();
         }
 
         public Guid Id { get; set; }
@@ -47,6 +47,6 @@ namespace SecondHandCarBidProject.Entities.Entities
         public virtual ICollection<CarBuyAdditionalFee> CarBuyAdditionalFees { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CarBuyHistory> CarBuyHistories { get; set; }
+        public virtual ICollection<CarBuyStatusHistory> CarBuyStatusHistories { get; set; }
     }
 }
