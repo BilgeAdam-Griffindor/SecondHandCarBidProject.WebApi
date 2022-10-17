@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SecondHandCarBidProject.DataAccess.Concrete;
+using SecondHandCarBidProject.DataAccess.Concrete.Token;
 using SecondHandCarBidProject.DataAccess.Interface;
+using SecondHandCarBidProject.DataAccess.Interface.Token;
 using SecondHandCarBidProject.DataAccess.Mongo;
 using SecondHandCarBidProject.DataAccess.Mongo.Abstract;
 using SecondHandCarBidProject.DataAccess.Mongo.Concrete;
-using SecondHandCarBidProject.DataAccess.Mongo.MongoModels;
 
 namespace SecondHandCarBidProject.Business.Extensions
 {
@@ -18,8 +18,9 @@ namespace SecondHandCarBidProject.Business.Extensions
             services.Configure<MongoSettings>(configuration.GetSection("MongoSettings"));
             //DPI
             services.AddSingleton<IMongoLog, MongoLog>();
-            services.AddScoped<IUserDAL, UserDAL>();
-
+            //services.AddScoped<IUserDAL, UserDAL>();
+            services.AddScoped<IAuthDAL, AuthDAL>();
+            services.AddScoped<ITokenHandler, TokenHandler>();
         }
     }
 }

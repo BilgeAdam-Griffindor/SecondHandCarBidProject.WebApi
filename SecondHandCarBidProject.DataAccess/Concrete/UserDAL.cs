@@ -1,21 +1,19 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using SecondHandCarBidProject.Common.DTOs;
-using SecondHandCarBidProject.Common.Validation;
 using SecondHandCarBidProject.DataAccess.Interface;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+using SecondHandCarBidProject.DataAccess.Interface.Token;
 
 namespace SecondHandCarBidProject.DataAccess.Concrete
 {
     public class UserDAL : IUserDAL
     {
         private IConfiguration _configuration;
+        private ITokenHandler _tokenHandler;
 
-        public UserDAL(IConfiguration configuration)
+        public UserDAL(IConfiguration configuration, ITokenHandler tokenHandler)
         {
             _configuration = configuration;
+            _tokenHandler = tokenHandler;
         }
 
         //esranın donus tipi gelecek
@@ -37,23 +35,35 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 responseModel.IsSuccess = false;
             */
 
-            var secretKey = _configuration.GetSection("JwtTokenKey").Value;
-            var singingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            //login olunca token bilgisini dönücez
+            //TokenDTO token = _tokenHandler.CreateAccessToken(30);
+            //_tokenHandler.UpdateRefreshToken(token.RefreshToken, userid.userid, token.Expiration, 45);
 
-            var tokenDesc = new SecurityTokenDescriptor
+            return null;
+        }
+        //esranın donus tipi gelecek
+        public Task<ExampleDTO> RefreshTokenAuthenticate(TokenUserRequestDTO req)
+        {
+            ResponseModel<ExampleDTO> responseModel = new ResponseModel<ExampleDTO>();
+            if (string.IsNullOrWhiteSpace(req.LoginUser) ||
+             string.IsNullOrWhiteSpace(req.LoginPassword))
             {
+                return null;
+            }
 
-                Subject = new ClaimsIdentity(new Claim[]
-              {
-                  // new Claim(ClaimTypes.Name, user.Id.ToString()) 
-              }),
-                NotBefore = DateTime.Now, // ToUTC 
-                Expires = DateTime.Now.AddHours(1),
-                SigningCredentials = new SigningCredentials(singingKey, SecurityAlgorithms.HmacSha256Signature)
-            };
+            //dbden user bilgisi gelecek
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var newToken = tokenHandler.CreateToken(tokenDesc);
+            //İşte burada exampleDTO yerine kendi dto doldurulacak.
+
+            /* Db'ye gittik ve girilen inputlara uygun bir kayıt bulamadık mesela :
+                responseModel.businessValidationRule = BusinessValidationRule.BadRequest;
+                responseModel.IsSuccess = false;
+            */
+
+            //dbden userı alıcaz eğer user varsa ve refreshtoken tablosundaki refreshtokenenddate datetimenowdan büyükse
+            //accesstoken olusturup refreshtokeni update edicez
+            //TokenDTO token = _tokenHandler.CreateAccessToken(30);
+            //_tokenHandler.UpdateRefreshToken(token.RefreshToken, userid.userid, token.Expiration, 45);
 
             return null;
         }
