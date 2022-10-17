@@ -1,9 +1,4 @@
 ﻿using SecondHandCarBidProject.Common.Validation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SecondHandCarBidProject.Common.DTOs
 {
@@ -32,6 +27,7 @@ namespace SecondHandCarBidProject.Common.DTOs
             }
         }
         public bool IsSuccess { get; set; }
+        public List<string> Errors { get; set; }
     }
 
 }

@@ -18,7 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddServices(builder.Configuration);
 
 
-string key = builder.Configuration.GetValue<string>("JwtTokenKey");
+string key = builder.Configuration.GetSection("JwtToken:SecurityKey").Value;
 byte[] keyValue = Encoding.UTF8.GetBytes(key);
 //jwt configurations
 builder.Services.AddAuthentication(auth =>
@@ -32,9 +32,11 @@ builder.Services.AddAuthentication(auth =>
     jwt.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
+        ValidateLifetime = true,
         IssuerSigningKey = new SymmetricSecurityKey(keyValue),
         ValidateIssuer = false,
         ValidateAudience = false,
+        LifetimeValidator = (notBefore, expires, securityToken, validationParameters) => expires != null ? expires > DateTime.UtcNow : false
     };
 });
 
