@@ -31,7 +31,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
             //  await _tokenHandler.UpdateRefreshToken(tokenDTO.RefreshToken, userid, tokenDTO.Expiration, 5);
             ResponseModel<TokenDTO> responseModel = new ResponseModel<TokenDTO>()
             {
-                businessValidationRule = Common.Validation.BusinessValidationRule.Success,
+                //businessValidationRule = Common.Validation.BusinessValidationRule.Success,
                 IsSuccess = true,
                 Data = tokenDTO,
                 Errors = null
