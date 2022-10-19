@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
@@ -19,5 +20,23 @@
     <ProjectReference Include="..\SecondHandCarBidProject.Common\SecondHandCarBidProject.Common.csproj" />
     <ProjectReference Include="..\SecondHandCarBidProject.DataAccess\SecondHandCarBidProject.DataAccess.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\ActionAuth\" />
+    <Folder Include="Controllers\AdditionalFee\" />
+    <Folder Include="Controllers\Address\" />
+    <Folder Include="Controllers\Advert\" />
+    <Folder Include="Controllers\Authorization\" />
+    <Folder Include="Controllers\Bid\" />
+    <Folder Include="Controllers\Car\" />
+    <Folder Include="Controllers\Corporation\" />
+    <Folder Include="Controllers\Expert\" />
+    <Folder Include="Controllers\Favorite\" />
+    <Folder Include="Controllers\User\" />
+    <Folder Include="Controllers\TrafficInsurance\" />
+    <Folder Include="Controllers\Notification\" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://docs.gradle.com/enterprise/admin/schema/gradle-enterprise-config-schema-5.json" /></VisualStudio></ProjectExtensions>
 
 </Project>

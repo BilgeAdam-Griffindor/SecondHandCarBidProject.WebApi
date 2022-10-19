@@ -43,6 +43,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
             }
             else
             {
+
                 responseModel = new ResponseModel<UserResponseDTO>()
                 {
                     businessValidationRule = Common.Validation.BusinessValidationRule.Unauthorized,
@@ -51,8 +52,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     Errors = new List<string>() { "Girilen bilgilere ait kullanıcı bulunamadı" }
                 };
                 return responseModel;
-            }
-
+            }              
         }
 
         public async Task<ResponseModel<TokenDTO>> RefreshTokenLoginAsync(string refreshToken)

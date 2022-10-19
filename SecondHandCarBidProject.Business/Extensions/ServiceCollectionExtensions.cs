@@ -22,7 +22,7 @@ namespace SecondHandCarBidProject.Business.Extensions
             // Settings
             services.Configure<MongoSettings>(configuration.GetSection("MongoSettings"));
             //DPI
-            services.AddSingleton<IMongoLog, MongoLog>();
+            //services.AddSingleton<IMongoLog, MongoLog>();
             //services.AddScoped<IUserDAL, UserDAL>();
             services.AddScoped<IAuthDAL, AuthDAL>();
             services.AddScoped<ITokenHandler, TokenHandler>();

@@ -87,7 +87,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="SmtpMail\EmailTemplates\Dialog.html" />
+    <Content Include="SmtpMail\EmailTemplates\Error.html" />
     <Content Include="SmtpMail\EmailTemplates\Information.html" />
+    <Content Include="SmtpMail\EmailTemplates\Warning.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
