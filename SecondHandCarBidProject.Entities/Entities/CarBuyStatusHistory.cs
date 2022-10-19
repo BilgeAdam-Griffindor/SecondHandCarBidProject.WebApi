@@ -7,14 +7,18 @@ namespace SecondHandCarBidProject.Entities.Entities
 {
 
 
-    [Table("CarBuyHistory")]
-    public partial class CarBuyHistory
+    [Table("CarBuyStatusHistory")]
+    public partial class CarBuyStatusHistory
     {
         public Guid Id { get; set; }
 
         public Guid CarBuyId { get; set; }
 
         public int StatusValueId { get; set; }
+
+        [Required]
+        [StringLength(1000)]
+        public string Explanation { get; set; }
 
         public bool IsActive { get; set; }
 
