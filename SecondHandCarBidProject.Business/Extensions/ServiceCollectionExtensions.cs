@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SecondHandCarBidProject.Business.Middlewares;
 using SecondHandCarBidProject.DataAccess.Concrete;
 using SecondHandCarBidProject.DataAccess.Concrete.Token;
+using SecondHandCarBidProject.DataAccess.Context;
 using SecondHandCarBidProject.DataAccess.Interface;
 using SecondHandCarBidProject.DataAccess.Interface.Token;
 using SecondHandCarBidProject.DataAccess.Mongo;
@@ -24,12 +25,14 @@ namespace SecondHandCarBidProject.Business.Extensions
             //DPI
             //services.AddSingleton<IMongoLog, MongoLog>();
             //services.AddScoped<IUserDAL, UserDAL>();
+            services.AddSingleton<DapperContext>();
             services.AddScoped<IAuthDAL, AuthDAL>();
             services.AddScoped<ITokenHandler, TokenHandler>();
             services.AddSingleton<IMongoLog<MongoLogModel>, MongoLog<MongoLogModel>>();
             services.AddSingleton(typeof(ILoggerFactoryMethod<>), typeof(LoggerFactoryMethod<>));
             services.AddSingleton<IMongoEmailPasswordToken, MongoEmailPasswordToken>();
             services.AddScoped<IUserDAL, UserDAL>();
+            services.AddScoped<IBidCorporationDAL, BidCorporationDAL>();
 
 
         }

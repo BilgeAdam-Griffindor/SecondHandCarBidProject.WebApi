@@ -27,7 +27,6 @@
     <Folder Include="Controllers\Address\" />
     <Folder Include="Controllers\Advert\" />
     <Folder Include="Controllers\Authorization\" />
-    <Folder Include="Controllers\Bid\" />
     <Folder Include="Controllers\Car\" />
     <Folder Include="Controllers\Corporation\" />
     <Folder Include="Controllers\Expert\" />
