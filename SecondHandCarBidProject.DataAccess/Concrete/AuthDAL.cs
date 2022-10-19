@@ -11,9 +11,11 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
         {
             _tokenHandler = tokenHandler;
         }
-        public async Task<ResponseModel<TokenDTO>> LoginAsync(string username, string password, int accessTokenLifeTime)
+        public async Task<ResponseModel<UserResponseDTO>> LoginAsync(string username, string password, int accessTokenLifeTime)
         {
             TokenDTO tokenDTO = null;
+            UserResponseDTO userResponse = null;
+            ResponseModel<UserResponseDTO> responseModel = null;
             //check user
             //if user exists;
             ExampleDTO user = new ExampleDTO()
@@ -24,19 +26,33 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
             };
             if (user.Email == username && user.Password == password)
             {
-                tokenDTO = _tokenHandler.CreateAccessToken(accessTokenLifeTime, user);//todo:user parameter
+                tokenDTO = _tokenHandler.CreateAccessToken(accessTokenLifeTime, user);//todo:user parameter                
+                userResponse.Token = tokenDTO;
+                userResponse.User = user;
+                //TokenDTO tokenDTO = _tokenHandler.CreateAccessToken(accessTokenLifeTime);//todo:user parameter
+                //then update refreshtoken
+                //  await _tokenHandler.UpdateRefreshToken(tokenDTO.RefreshToken, userid, tokenDTO.Expiration, 5);
+                responseModel = new ResponseModel<UserResponseDTO>()
+                {
+                    businessValidationRule = Common.Validation.BusinessValidationRule.Success,
+                    IsSuccess = true,
+                    Data = userResponse,
+                    Errors = null
+                };
+                return responseModel;
             }
-            //TokenDTO tokenDTO = _tokenHandler.CreateAccessToken(accessTokenLifeTime);//todo:user parameter
-            //then update refreshtoken
-            //  await _tokenHandler.UpdateRefreshToken(tokenDTO.RefreshToken, userid, tokenDTO.Expiration, 5);
-            ResponseModel<TokenDTO> responseModel = new ResponseModel<TokenDTO>()
+            else
             {
-                businessValidationRule = Common.Validation.BusinessValidationRule.Success,
-                IsSuccess = true,
-                Data = tokenDTO,
-                Errors = null
-            };
-            return responseModel;
+                responseModel = new ResponseModel<UserResponseDTO>()
+                {
+                    businessValidationRule = Common.Validation.BusinessValidationRule.Unauthorized,
+                    IsSuccess = false,
+                    Data = userResponse,
+                    Errors = new List<string>() { "Girilen bilgilere ait kullanıcı bulunamadı" }
+                };
+                return responseModel;
+            }
+
         }
 
         public async Task<ResponseModel<TokenDTO>> RefreshTokenLoginAsync(string refreshToken)
