@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SecondHandCarBidProject.DataAccess.Mongo.Abstract
 {
-    public interface IMongoLog<T> where T :class
+    public interface IMongoUserRequestLog<T> where T :class
     {
-        Task<bool> AddLogToMongo(T log);
+        Task<bool> AddUserRequestLogToMongo(T log);
     }
 }

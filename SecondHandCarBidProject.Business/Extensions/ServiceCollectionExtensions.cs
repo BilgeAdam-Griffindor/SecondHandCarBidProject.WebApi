@@ -9,9 +9,10 @@ using SecondHandCarBidProject.DataAccess.Mongo;
 using SecondHandCarBidProject.DataAccess.Mongo.Abstract;
 using SecondHandCarBidProject.DataAccess.Mongo.Concrete;
 using SecondHandCarBidProject.DataAccess.Mongo.MongoModels;
+using SecondHandCarBidProject.Log.Abstract;
 using SecondHandCarBidProject.Log.Concrete;
 using SecondHandCarBidProject.Logs.Abstract;
-
+using SecondHandCarBidProject.Logs.Concrete;
 
 namespace SecondHandCarBidProject.Business.Extensions
 {
@@ -22,11 +23,13 @@ namespace SecondHandCarBidProject.Business.Extensions
             // Settings
             services.Configure<MongoSettings>(configuration.GetSection("MongoSettings"));
             //DPI
-            //services.AddSingleton<IMongoLog, MongoLog>();
             //services.AddScoped<IUserDAL, UserDAL>();
+            services.AddSingleton<IUserRequestLogCatcher, UserRequestLogCatcher>();
+            services.AddScoped<ILogCatcherMongoLog, LogCatcherMongoLog>();
             services.AddScoped<IAuthDAL, AuthDAL>();
             services.AddScoped<ITokenHandler, TokenHandler>();
-            services.AddSingleton<IMongoLog<MongoLogModel>, MongoLog<MongoLogModel>>();
+            services.AddSingleton<IMongoUserRequestLog<MongoUserRequestLogModel>, MongoUserRequestLog<MongoUserRequestLogModel>>();
+            services.AddSingleton<IMongoExceptionLog<MongoExceptionLogModel>, MongoExceptionLog<MongoExceptionLogModel>>();
             services.AddSingleton(typeof(ILoggerFactoryMethod<>), typeof(LoggerFactoryMethod<>));
             services.AddSingleton<IMongoEmailPasswordToken, MongoEmailPasswordToken>();
             services.AddScoped<IUserDAL, UserDAL>();

@@ -10,7 +10,7 @@ using SecondHandCarBidProject.DataAccess.Abstract;
 
 namespace SecondHandCarBidProject.DataAccess.Mongo.MongoModels
 {
-    public class MongoLogModel:ILogEntity
+    public class MongoUserRequestLogModel:ILogEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
