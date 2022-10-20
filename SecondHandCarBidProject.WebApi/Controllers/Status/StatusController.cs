@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SecondHandCarBidProject.Common.DTOs;
+using SecondHandCarBidProject.Logs.Abstract;
 
 namespace SecondHandCarBidProject.WebApi.Controllers.Status
 {
@@ -14,6 +15,11 @@ namespace SecondHandCarBidProject.WebApi.Controllers.Status
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
+        ILogCatcherMongoLog log;
+        public StatusController(ILogCatcherMongoLog _log)
+        {
+            log = _log;
+        }
         [HttpGet("Get-Status")]
         public ResponseModel<StatusDTO> GetStatus(string filter = "")
         {

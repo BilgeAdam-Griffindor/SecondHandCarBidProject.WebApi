@@ -19,22 +19,16 @@ namespace SecondHandCarBidProject.Business.Middlewares
     public class UserActionLogMiddleware
     {
         private readonly RequestDelegate _next;
-        private ILoggerFactoryMethod<MongoLogModel> loggerFactoryMethod;
-        public UserActionLogMiddleware(RequestDelegate next, ILoggerFactoryMethod<MongoLogModel> _loggerfactorymethod,IOptions<MongoSettings> options)
+        private IUserRequestLogCatcher logCatcher;
+        public UserActionLogMiddleware(RequestDelegate next,IOptions<MongoSettings> options,IUserRequestLogCatcher _logCatcher)
         {
            _next = next;
-            loggerFactoryMethod = _loggerfactorymethod;
+            logCatcher = _logCatcher;
 
         }
         public async Task Invoke(HttpContext httpContext)
         {
-            MongoLogModel mongoLogModel = new MongoLogModel();
-            mongoLogModel.IpAddress= httpContext.Connection.RemoteIpAddress.ToString();
-            mongoLogModel.CreatedDate= DateTime.Now;
-            mongoLogModel.ActionType= httpContext.Request.Method;
-            mongoLogModel.Url= httpContext.Request.Path;
-            mongoLogModel.BrowserType= httpContext.Request.Headers["User-Agent"].ToString();
-            var result =  loggerFactoryMethod.FactoryMethod(LoggerFactoryMethod<MongoLogModel>.LoggerType.FileLogger, mongoLogModel);
+            await logCatcher.UserRequestLogAddToMongoDb(httpContext);
             await _next(httpContext);
         }
     }

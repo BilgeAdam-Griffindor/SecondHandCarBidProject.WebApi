@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 using SecondHandCarBidProject.DataAccess.Abstract;
 using SecondHandCarBidProject.DataAccess.Mongo;
 using SecondHandCarBidProject.DataAccess.Mongo.Abstract;
@@ -18,20 +19,21 @@ namespace SecondHandCarBidProject.Log.Concrete
     public class LoggerFactoryMethod<T> : ILoggerFactoryMethod<T>
         where T : class,ILogEntity
     {
-        IMongoLog<T> mongolog;
+        
         IOptions<MongoSettings> options;
         public LoggerFactoryMethod()
         {
 
         }
-        public LoggerFactoryMethod(IMongoLog<T> _mongoLog,IOptions<MongoSettings> _options)
+        public LoggerFactoryMethod(IOptions<MongoSettings> _options)
         {
-            mongolog = _mongoLog;
+           
             options = _options;
         }
         public enum LoggerType
         {
-            MongoDatabaseLogger = 1,
+            MongoUserRequestLogger = 1,
+            MongoExceptionLogger=2,
             FileLogger = 3,
         }
         public async Task FactoryMethod(LoggerType logType, T data)
@@ -39,8 +41,11 @@ namespace SecondHandCarBidProject.Log.Concrete
             ILoggerExtension<T> log = null;
             switch (logType)
             {
-                case LoggerType.MongoDatabaseLogger:
-                    log = new MongoDatabaseLog<T>(mongolog);
+                case LoggerType.MongoUserRequestLogger:
+                    log = new MongoUserRequestLogger<T>(options);
+                    break;
+                case LoggerType.MongoExceptionLogger:
+                    log = new MongoExceptionLogger<T>(options);
                     break;
                 case LoggerType.FileLogger:
                     log = new FileLogger<T>();

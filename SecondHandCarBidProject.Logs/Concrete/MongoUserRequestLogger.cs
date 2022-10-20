@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 using SecondHandCarBidProject.DataAccess.Abstract;
 using SecondHandCarBidProject.DataAccess.Mongo;
 using SecondHandCarBidProject.DataAccess.Mongo.Abstract;
@@ -15,16 +16,17 @@ using System.Threading.Tasks;
 namespace SecondHandCarBidProject.Log.Concrete
 {
     /// <summary>
-    /// This class add log data to mongodb
+    /// This class add user request log data to mongodb
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class MongoDatabaseLog<T> : ILoggerExtension<T> 
+    public class MongoUserRequestLogger<T> : ILoggerExtension<T> 
         where T : class, ILogEntity
     {
-        IMongoLog<T> mongoLog;
-        public MongoDatabaseLog(IMongoLog<T> mongoLog)
+
+        IMongoUserRequestLog<T> mongoLog; 
+        public MongoUserRequestLogger(IOptions<MongoSettings> options)
         {
-            this.mongoLog = mongoLog;
+            mongoLog = new MongoUserRequestLog<T>(options);
         }
         /// <summary>
         /// This method takes generic paramater as a T type data. 
@@ -34,7 +36,7 @@ namespace SecondHandCarBidProject.Log.Concrete
         public async Task DataLog(T data)
         {
 
-            await mongoLog.AddLogToMongo(data);
+            await mongoLog.AddUserRequestLogToMongo(data);
         }
     }
 }
