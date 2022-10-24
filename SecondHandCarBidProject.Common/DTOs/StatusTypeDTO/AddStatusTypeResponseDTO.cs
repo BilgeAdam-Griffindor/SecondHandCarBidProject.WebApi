@@ -1,6 +1,6 @@
 ﻿namespace SecondHandCarBidProject.WebApi.Controllers
 {
-    public class DeleteStatusResponseDTO
+    public class AddStatusTypeResponseDTO
     {
 
     }

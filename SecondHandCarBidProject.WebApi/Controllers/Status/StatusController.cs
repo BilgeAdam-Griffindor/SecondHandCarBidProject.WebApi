@@ -21,7 +21,7 @@ namespace SecondHandCarBidProject.WebApi.Controllers.Status
             log = _log;
         }
         [HttpGet("Get-Status")]
-        public ResponseModel<StatusDTO> GetStatus(string filter = "")
+        public ResponseModel<StatusTypeDTO> GetStatus(string filter = "")
         {
             if (filter == "")
             {
@@ -32,11 +32,11 @@ namespace SecondHandCarBidProject.WebApi.Controllers.Status
 
             }
 
-            return new ResponseModel<StatusDTO>();
+            return new ResponseModel<StatusTypeDTO>();
         }
 
         [HttpPut("Update")]
-        public ResponseModel<UpdateStatusResponseDTO> UpdateStatus(UpdateStatusDTO dto)
+        public ResponseModel<UpdateStatusResponseDTO> UpdateStatus(UpdateStatusTypeDTO dto)
         {
 
 
@@ -44,19 +44,19 @@ namespace SecondHandCarBidProject.WebApi.Controllers.Status
         }
 
         [HttpDelete("Delete")]
-        public ResponseModel<DeleteStatusResponseDTO> DeleteStatus(int id)
+        public ResponseModel<DeleteStatusTypeResponseDTO> DeleteStatus(int id)
         {
 
 
-            return new ResponseModel<DeleteStatusResponseDTO>();
+            return new ResponseModel<DeleteStatusTypeResponseDTO>();
         }
 
         [HttpPost("Add")]
-        public ResponseModel<AddStatusResponseDTO> AddStatus(StatusDTO dto)
+        public ResponseModel<AddStatusTypeResponseDTO> AddStatus(StatusTypeDTO dto)
         {
 
 
-            return new ResponseModel<AddStatusResponseDTO>();
+            return new ResponseModel<AddStatusTypeResponseDTO>();
         }
     }
 }

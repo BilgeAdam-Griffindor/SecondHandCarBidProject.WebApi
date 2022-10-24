@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SecondHandCarBidProject.DataAccess.Concrete.User
+namespace SecondHandCarBidProject.Common.DTOs.PageAuthTypeDTO
 {
-    public class UserAutoBidDAL
+    public record PageAuthTypeAddDTO(string AuthorizationName)
     {
     }
 }
