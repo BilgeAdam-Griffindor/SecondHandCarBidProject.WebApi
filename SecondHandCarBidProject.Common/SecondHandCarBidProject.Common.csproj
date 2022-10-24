@@ -17,4 +17,14 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTOs\UserAutoBidDTO\" />
+    <Folder Include="DTOs\TrafficInsuranceTrafficInsuranceCarComponentDTO\" />
+    <Folder Include="DTOs\TrafficInsuranceCarComponentDTO\" />
+    <Folder Include="DTOs\TrafficInsuranceDTO\" />
+    <Folder Include="DTOs\StatusValueDTO\" />
+    <Folder Include="DTOs\RoleTypeDTO\" />
+    <Folder Include="DTOs\RolePageActionAuthDto\" />
+  </ItemGroup>
+
 </Project>
