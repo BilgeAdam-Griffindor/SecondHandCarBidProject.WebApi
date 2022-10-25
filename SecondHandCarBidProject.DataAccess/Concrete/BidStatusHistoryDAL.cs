@@ -1,5 +1,7 @@
-﻿using MongoDB.Driver;
+﻿using Dapper;
 using SecondHandCarBidProject.Common.DTOs;
+using SecondHandCarBidProject.Common.DTOs.BidOffer;
+using SecondHandCarBidProject.Common.DTOs.BidStatusHistory;
 using SecondHandCarBidProject.DataAccess.Context;
 using SecondHandCarBidProject.DataAccess.Interface;
 using System;
@@ -7,37 +9,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Dapper;
-using SecondHandCarBidProject.Common.DTOs.BidCorporation;
 
 namespace SecondHandCarBidProject.DataAccess.Concrete
 {
-    public class BidCorporationDAL : IBidCorporationDAL
+    internal class BidStatusHistoryDAL : IBidStatusHistoryDAL
     {
         private readonly DapperContext _context;
 
-        public BidCorporationDAL(DapperContext context)
+        public BidStatusHistoryDAL(DapperContext context)
         {
             _context = context;
         }
 
-        public async Task<ResponseModel<BidCorporationAddPageDTO>> AddGet()
+        public async Task<ResponseModel<BidStatusHistoryAddPageDTO>> AddGet()
         {
             try
             {
                 using (var connection = _context.CreateConnection())
                 {
-                    var bidQuery = "SELECT Id, BidName as Name FROM Bid";
-                    var bid = await connection.QueryAsync<IdNameListDTO>(bidQuery);
-                    List<IdNameListDTO> bidCorporationsList = bid.ToList();
+                    var bidQuery = @"SELECT Id, BidName as Name FROM Bid ORDER BY BidName";
+                    var bidResult = await connection.QueryAsync<IdNameListDTO>(bidQuery);
+                    List<IdNameListDTO> bidList = bidResult.ToList();
 
-                    var corporationQuery = "SELECT Id as Id, CompanyName as Name FROM Corporation";
-                    var corporations = await connection.QueryAsync<IdNameListDTO>(corporationQuery);
-                    List<IdNameListDTO> corporationsList = corporations.ToList();
+                    var statusValueQuery = "SELECT Id, StatusName as Name FROM StatusValue WHERE StatusTypeId = 2";
+                    var statusValueResult = await connection.QueryAsync<IdNameListDTO>(statusValueQuery);
+                    List<IdNameListDTO> statusValueList = statusValueResult.ToList();
 
-                    BidCorporationAddPageDTO responseDTO = new BidCorporationAddPageDTO(bidCorporationsList, corporationsList);
+                    BidStatusHistoryAddPageDTO responseDTO = new BidStatusHistoryAddPageDTO(bidList, statusValueList);
 
-                    return new ResponseModel<BidCorporationAddPageDTO>()
+                    return new ResponseModel<BidStatusHistoryAddPageDTO>()
                     {
                         Data = responseDTO,
                         IsSuccess = true,
@@ -52,9 +52,9 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 if (ex.InnerException != null)
                     errors.Add(ex.InnerException.Message);
 
-                return new ResponseModel<BidCorporationAddPageDTO>()
+                return new ResponseModel<BidStatusHistoryAddPageDTO>()
                 {
-                    Data = new BidCorporationAddPageDTO(new List<IdNameListDTO>(), new List<IdNameListDTO>()),
+                    Data = new BidStatusHistoryAddPageDTO(new List<IdNameListDTO>(), new List<IdNameListDTO>()),
                     IsSuccess = false,
                     statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
@@ -62,12 +62,12 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
             }
         }
 
-        public async Task<ResponseModel<bool>> AddPost(BidCorporationAddSendDTO dto)
+        public async Task<ResponseModel<bool>> AddPost(BidStatusHistoryAddSendDTO dto)
         {
             try
             {
-                var query = "EXEC BidCorporationAdd @bidId, @corporationId, @createdBy";
-                var parameters = new { bidId = dto.BidId, corporationId = dto.CorporationId, createdBy = dto.CreatedBy };
+                var query = "INSERT INTO BidStatusHistory (Id, BidId, StatusValueId, Explanation, CreatedBy) values(NEWID(), @bidId, @statusId, @explanation, @createdBy)";
+                var parameters = new { bidId = dto.BidId, statusId = dto.StatusValueId, explanation = dto.Explanation, createdBy = dto.CreatedBy };
                 using (var connection = _context.CreateConnection())
                 {
                     var result = await connection.ExecuteAsync(query, parameters);
@@ -97,12 +97,12 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
             }
         }
 
-        public async Task<ResponseModel<bool>> Delete(Guid bidId, int corporationId, Guid modifiedBy)
+        public async Task<ResponseModel<bool>> Delete(Guid id)
         {
             try
             {
-                var query = "EXEC BidCorporationDelete @bidId, @corporationId, @modifiedBy";
-                var parameters = new { bidId = bidId, corporationId = corporationId, modifiedBy = modifiedBy };
+                var query = @"DELETE FROM BidStatusHistory WHERE Id=@id";
+                var parameters = new { id = id };
                 using (var connection = _context.CreateConnection())
                 {
                     var result = await connection.ExecuteAsync(query, parameters);
@@ -132,23 +132,29 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
             }
         }
 
-        public async Task<ResponseModel<BidCorporationListPageDTO>> List(int page = 1, int itemPerPage = 100)
+        public async Task<ResponseModel<BidStatusHistoryListPageDTO>> List(int page = 1, int itemPerPage = 100)
         {
             try
             {
-                var query = "EXEC BidCorporationList @page, @itemPerPage";
+                var query = @"SELECT bsh.Id, b.BidName, sv.StatusName, bsh.CreatedDate
+	                        FROM BidStatusHistory bsh
+	                        JOIN Bid b on bsh.BidId = b.Id
+	                        JOIN StatusValue sv on bsh.StatusValueId = sv.Id
+	                        WHERE bsh.IsActive = 1
+	                        ORDER BY bsh.Id DESC
+	                        OFFSET (@page - 1) * @itemPerPage ROWS FETCH NEXT @itemPerPage ROWS ONLY";
                 var parameters = new { page = page, itemPerPage = itemPerPage };
                 using (var connection = _context.CreateConnection())
                 {
-                    var bidCorporations = await connection.QueryAsync<BidCorporationListTableRowsDTO>(query, parameters);
-                    List<BidCorporationListTableRowsDTO> bidCorporationsList = bidCorporations.ToList();
+                    var bidStatusHistoryResult = await connection.QueryAsync<BidStatusHistoryListTableRowsDTO>(query, parameters);
+                    List<BidStatusHistoryListTableRowsDTO> bidStatusHistoryList = bidStatusHistoryResult.ToList();
 
-                    int maxPage = Convert.ToInt32(await connection.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM BidCorporation"));
+                    int maxPage = Convert.ToInt32(await connection.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM BidOffer"));
                     maxPage = (int)Math.Ceiling((double)maxPage / itemPerPage);
 
-                    BidCorporationListPageDTO responseDTO = new BidCorporationListPageDTO(bidCorporationsList, maxPage);
+                    BidStatusHistoryListPageDTO responseDTO = new BidStatusHistoryListPageDTO(bidStatusHistoryList, maxPage);
 
-                    return new ResponseModel<BidCorporationListPageDTO>()
+                    return new ResponseModel<BidStatusHistoryListPageDTO>()
                     {
                         Data = responseDTO,
                         IsSuccess = true,
@@ -163,9 +169,9 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 if (ex.InnerException != null)
                     errors.Add(ex.InnerException.Message);
 
-                return new ResponseModel<BidCorporationListPageDTO>()
+                return new ResponseModel<BidStatusHistoryListPageDTO>()
                 {
-                    Data = new BidCorporationListPageDTO(new List<BidCorporationListTableRowsDTO>(), 0),
+                    Data = new BidStatusHistoryListPageDTO(new List<BidStatusHistoryListTableRowsDTO>(), 0),
                     IsSuccess = false,
                     statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
