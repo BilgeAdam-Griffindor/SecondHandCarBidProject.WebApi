@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SecondHandCarBidProject.Common.DTOs
+namespace SecondHandCarBidProject.Common.DTOs.BidResult
 {
-    public record BidCorporationListPageDTO(
-        List<BidCorporationListTableRowsDTO> TableRows,
+    public record BidResultListPageDTO(
+        List<BidResultListTableRowsDTO> TableRows,
         int maxPages
         );
 }

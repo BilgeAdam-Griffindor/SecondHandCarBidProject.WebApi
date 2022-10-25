@@ -34,7 +34,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 //  await _tokenHandler.UpdateRefreshToken(tokenDTO.RefreshToken, userid, tokenDTO.Expiration, 5);
                 responseModel = new ResponseModel<UserResponseDTO>()
                 {
-                    businessValidationRule = Common.Validation.BusinessValidationRule.Success,
+                    //businessValidationRule = Common.Validation.BusinessValidationRule.Success,
                     IsSuccess = true,
                     Data = userResponse,
                     Errors = null
@@ -46,7 +46,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
 
                 responseModel = new ResponseModel<UserResponseDTO>()
                 {
-                    businessValidationRule = Common.Validation.BusinessValidationRule.Unauthorized,
+                    //businessValidationRule = Common.Validation.BusinessValidationRule.Unauthorized,
                     IsSuccess = false,
                     Data = userResponse,
                     Errors = new List<string>() { "Girilen bilgilere ait kullanıcı bulunamadı" }

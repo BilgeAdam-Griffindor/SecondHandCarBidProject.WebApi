@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SecondHandCarBidProject.Common.DTOs;
+using SecondHandCarBidProject.Common.DTOs.BidCorporation;
 using SecondHandCarBidProject.DataAccess.Interface;
 
 namespace SecondHandCarBidProject.WebApi.Controllers.Bid

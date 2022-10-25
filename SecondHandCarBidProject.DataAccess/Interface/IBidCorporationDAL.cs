@@ -1,4 +1,5 @@
 ﻿using SecondHandCarBidProject.Common.DTOs;
+using SecondHandCarBidProject.Common.DTOs.BidCorporation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
