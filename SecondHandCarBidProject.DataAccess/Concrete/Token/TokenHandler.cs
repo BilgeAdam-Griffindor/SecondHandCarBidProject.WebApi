@@ -17,7 +17,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete.Token
         {
             _configuration = configuration;
         }
-        public TokenDTO CreateAccessToken(int minute, ExampleDTO user)
+        public TokenDTO CreateAccessToken(int minute, BaseUserDTO user)
         {
             TokenDTO tokenDTO = new TokenDTO();
 
@@ -31,7 +31,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete.Token
             SigningCredentials signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
 
             //give the token settings to be created
-            tokenDTO.Expiration = DateTime.UtcNow.AddSeconds(minute);
+            tokenDTO.Expiration = DateTime.UtcNow.AddMinutes(minute);
 
             JwtSecurityToken securityToken = new JwtSecurityToken(
                 audience: _configuration["JwtToken:Audience"],
@@ -64,7 +64,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete.Token
         }
 
         //update resfresh token
-        public async Task UpdateRefreshToken(string refreshToken, ExampleDTO user, DateTime accessTokenDate, int addOnAccessTokenDate)
+        public async Task UpdateRefreshToken(string refreshToken, BaseUserDTO user, DateTime accessTokenDate, int addOnAccessTokenDate)
         {
             //refresh token tablosunda string refreshtoken,datetime expiration,userid tutulacak
             //dbdeb userid ye göre user gelicek.user varsa refreshtokendbye user ve refreshtoken eklenecek
