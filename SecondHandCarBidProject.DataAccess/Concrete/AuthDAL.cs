@@ -59,9 +59,8 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
 
 
                     return responseModel;
-                }
+                }                 
             }
-
         }
 
         public async Task<ResponseModel<TokenDTO>> RefreshTokenLoginAsync(string refreshToken)

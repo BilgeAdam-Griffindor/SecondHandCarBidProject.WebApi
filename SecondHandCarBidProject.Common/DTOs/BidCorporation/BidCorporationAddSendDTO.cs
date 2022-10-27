@@ -1,4 +1,4 @@
-﻿namespace SecondHandCarBidProject.Common.DTOs
+﻿namespace SecondHandCarBidProject.Common.DTOs.BidCorporation
 {
     public record BidCorporationAddSendDTO(
         Guid BidId,
