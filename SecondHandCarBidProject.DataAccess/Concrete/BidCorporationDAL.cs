@@ -1,13 +1,8 @@
-﻿using MongoDB.Driver;
+﻿using Dapper;
+using MongoDB.Driver;
 using SecondHandCarBidProject.Common.DTOs;
 using SecondHandCarBidProject.DataAccess.Context;
 using SecondHandCarBidProject.DataAccess.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
 
 namespace SecondHandCarBidProject.DataAccess.Concrete
 {
@@ -22,7 +17,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
         public async Task<ResponseModel<BidCorporationListPageDTO>> List(int page = 1, int itemPerPage = 100)
         {
             var query = "EXEC BidCorporationList @page, @itemPerPage";
-            var parameters = new {page = page, itemPerPage = itemPerPage};
+            var parameters = new { page = page, itemPerPage = itemPerPage };
             using (var connection = _context.CreateConnection())
             {
                 var bidCorporations = await connection.QueryAsync<BidCorporationListTableRowsDTO>(query, parameters);
@@ -37,7 +32,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = responseDTO,
                     IsSuccess = true,
-                    statusCode = Common.Validation.StatusCode.Success
+                    //statusCode = Common.Validation.StatusCode.Success
                 };
             }
         }
@@ -60,7 +55,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = responseDTO,
                     IsSuccess = true,
-                    statusCode = Common.Validation.StatusCode.Success
+                    //  statusCode = Common.Validation.StatusCode.Success
                 };
             }
         }
@@ -77,7 +72,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = result > 0,
                     IsSuccess = true,
-                    statusCode = Common.Validation.StatusCode.Success
+                    //statusCode = Common.Validation.StatusCode.Success
                 };
             }
         }
@@ -96,7 +91,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     {
                         Data = result > 0,
                         IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        //  statusCode = Common.Validation.StatusCode.Success
                     };
                 }
             }

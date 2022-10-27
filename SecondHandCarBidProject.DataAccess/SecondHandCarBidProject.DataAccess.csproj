@@ -23,8 +23,6 @@
 
   <ItemGroup>
 
-    <Folder Include="Concrete\" />
-
     <Folder Include="Context\" />
     <Folder Include="Abstract\" />
   </ItemGroup>
