@@ -23,9 +23,6 @@
     <Folder Include="DTOs\TrafficInsuranceTrafficInsuranceCarComponentDTO\" />
     <Folder Include="DTOs\TrafficInsuranceCarComponentDTO\" />
     <Folder Include="DTOs\TrafficInsuranceDTO\" />
-    <Folder Include="DTOs\StatusValueDTO\" />
-    <Folder Include="DTOs\RoleTypeDTO\" />
-    <Folder Include="DTOs\RolePageActionAuthDto\" />
   </ItemGroup>
 
 </Project>

@@ -22,5 +22,23 @@ namespace SecondHandCarBidProject.WebApi.Controllers.Authorization
             var data = await _pageAuthTypeDal.List(page, itemPerPage);
             return data;
         }
+        [HttpPost("Add")]
+        public async Task<ResponseModel<bool>> Add(PageAuthTypeAddDTO pageAuthTypeAddDTO)
+        {
+            var data = await _pageAuthTypeDal.AddGet(pageAuthTypeAddDTO);
+            return data;
+        }
+        [HttpDelete("Delete")]
+        public async Task<ResponseModel<bool>> Delete(short id)
+        {
+            var data = await _pageAuthTypeDal.Delete(id);
+            return data;
+        }
+        [HttpPut("Update")]
+        public async Task<ResponseModel<bool>> Update(PageAuthTypeUpdateDTO pageAuthTypeUpdateDTO)
+        {
+            var data = await _pageAuthTypeDal.Update(pageAuthTypeUpdateDTO);
+            return data;
+        }
     }
 }
