@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SecondHandCarBidProject.DataAccess.Interface.IAuthorization
+namespace SecondHandCarBidProject.Common.DTOs.RoleTypeDTO
 {
-    internal interface IRolePageActionAuthDALcs
+    public class RoleTypeAddDto
     {
+        public string RoleName { get; set; }
     }
 }

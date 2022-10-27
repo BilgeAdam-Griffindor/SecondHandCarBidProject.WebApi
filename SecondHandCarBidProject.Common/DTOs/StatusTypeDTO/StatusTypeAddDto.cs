@@ -1,8 +1,7 @@
 ﻿namespace SecondHandCarBidProject.WebApi.Controllers
 {
-    public class StatusTypeDto
+    public class StatusTypeAddDTO
     {
-        public int Id { get; set; }
         public string StatusTypeName { get; set; }
     }
 }
