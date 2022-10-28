@@ -39,6 +39,7 @@ namespace SecondHandCarBidProject.Business.Extensions
             services.AddScoped<IUserDAL, UserDAL>();
             services.AddScoped<IBidCorporationDAL, BidCorporationDAL>();
             services.AddScoped<IPageAuthTypeDal, PageAuthTypeDAL>();
+            services.AddScoped<IBidDAL, BidDAL>();
 
         }
     }

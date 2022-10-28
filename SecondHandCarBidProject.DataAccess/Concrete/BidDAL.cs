@@ -6,6 +6,7 @@ using SecondHandCarBidProject.DataAccess.Context;
 using SecondHandCarBidProject.DataAccess.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 using (var connection = _context.CreateConnection())
                 {
                     string carQuery;
-                    if (isCorporate)
+                    if (!isCorporate)
                         carQuery = @"select c.Id, (cb.BrandName + ' - ' + cm.ModelName + ' - ' + cast(c.CreatedDate as nvarchar(20))) as Name
                             from Car c
                             join CarBrand cb on c.CarBrandId = cb.Id
@@ -50,7 +51,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                             AND csh.StatusValueId = 1";
 
                     var parameters = new { userId = userId };
-                    var carResult = await connection.QueryAsync<IdNameListDTO>(carQuery);
+                    var carResult = await connection.QueryAsync<IdNameListDTO>(carQuery, parameters);
                     List<IdNameListDTO> carList = carResult.ToList();
 
                     BidAddPageUserDTO responseDTO = new BidAddPageUserDTO()
@@ -90,8 +91,18 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
         {
             try
             {
+                DataTable dataTable = new DataTable();
+                dataTable.Columns.Add(new DataColumn("Id", typeof(Guid)));
+
+                for (int i = 0; i < dto.CarIds.Count; i++)
+                {
+                    DataRow row = dataTable.NewRow();
+                    row["Id"] = dto.CarIds[i];
+                    dataTable.Rows.Add(row);
+                }
+
                 var query = "EXEC AddNewBidSimpler @bidName, @isCorporate, @corporationId, @bidStartDate, @bidEndDate, @createdBy, @bidCarsList, @explanation";
-                var parameters = new { bidName = dto.BidName, isCorporate = dto.CorporationId != null, corporationId = dto.CorporationId, bidStartDate = dto.StartDate, bidEndDate = dto.EndDate, createdBy = dto.CreatedBy, bidCarsList = dto.CarIds, explanation = "Yeni ihale."};
+                var parameters = new { bidName = dto.BidName, isCorporate = dto.CorporationId != null, corporationId = dto.CorporationId, bidStartDate = dto.StartDate, bidEndDate = dto.EndDate, createdBy = dto.CreatedBy, bidCarsList = dataTable.AsTableValuedParameter("GuidIdList"), explanation = "Yeni ihale."};
                 using (var connection = _context.CreateConnection())
                 {
                     var result = await connection.ExecuteAsync(query, parameters);
