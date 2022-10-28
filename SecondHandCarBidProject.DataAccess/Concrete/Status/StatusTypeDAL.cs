@@ -67,8 +67,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete.Status
                 return new ResponseModel<StatusTypeListDto>()
                 {
                     Data = statusTypeListDTO,
-                    IsSuccess = true,
-                    statusCode = Common.Validation.StatusCode.Success
+                    IsSuccess = true
                 };
             }
         }

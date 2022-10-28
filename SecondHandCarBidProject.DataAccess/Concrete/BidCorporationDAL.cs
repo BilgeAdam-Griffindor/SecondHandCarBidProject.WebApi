@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using MongoDB.Driver;
 using SecondHandCarBidProject.Common.DTOs;
+using SecondHandCarBidProject.Common.DTOs.BidCorporation;
 using SecondHandCarBidProject.DataAccess.Context;
 using SecondHandCarBidProject.DataAccess.Interface;
 
@@ -17,9 +18,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
 
         public async Task<ResponseModel<BidCorporationAddPageDTO>> AddGet()
         {
-            var query = "EXEC BidCorporationList @page, @itemPerPage";
-            var parameters = new { page = page, itemPerPage = itemPerPage };
-            using (var connection = _context.CreateConnection())
             try
             {
                 using (var connection = _context.CreateConnection())
@@ -37,8 +35,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<BidCorporationAddPageDTO>()
                     {
                         Data = responseDTO,
-                        IsSuccess = true,
-                        //statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
 
@@ -54,7 +51,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = new BidCorporationAddPageDTO(new List<IdNameListDTO>(), new List<IdNameListDTO>()),
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
                 };
             }
@@ -73,8 +69,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<bool>()
                     {
                         Data = result > 0,
-                        IsSuccess = true,
-                       // statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -89,7 +84,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = false,
                     IsSuccess = false,
-                  //  statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
                 };
             }
@@ -108,8 +102,8 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<bool>()
                     {
                         Data = result > 0,
-                        IsSuccess = true,
-                        //  statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
+                        //  
                     };
                 }
             }
@@ -124,7 +118,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = false,
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
                 };
             }
@@ -149,8 +142,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<BidCorporationListPageDTO>()
                     {
                         Data = responseDTO,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -165,7 +157,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = new BidCorporationListPageDTO(new List<BidCorporationListTableRowsDTO>(), 0),
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
                 };
             }

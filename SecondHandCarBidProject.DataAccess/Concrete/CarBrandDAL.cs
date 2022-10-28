@@ -34,8 +34,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<bool>()
                     {
                         Data = result > 0,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -50,7 +49,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = false,
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
                 };
             }
@@ -70,8 +68,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<bool>()
                     {
                         Data = result > 0,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -86,7 +83,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = false,
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
                 };
             }
@@ -116,8 +112,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<CarBrandListPageDTO>()
                     {
                         Data = responseDTO,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -132,7 +127,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = new CarBrandListPageDTO(new List<CarBrandListTableRow>(), 0),
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
                 };
             }
@@ -152,8 +146,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<CarBrandUpdatePageDTO>()
                     {
                         Data = responseDTO,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -168,7 +161,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = new CarBrandUpdatePageDTO(0, ""),
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
                 };
             }
@@ -188,8 +180,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<bool>()
                     {
                         Data = result > 0,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -204,7 +195,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = false,
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
                 };
             }
