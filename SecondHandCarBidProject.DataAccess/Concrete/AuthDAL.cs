@@ -59,7 +59,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
 
 
                     return responseModel;
-                }                 
+                }
             }
         }
 
@@ -73,7 +73,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
             //    ResponseModel<TokenDTO> response = new ResponseModel<TokenDTO>()
             //    {
             //        Data = tokenDTO,
-            //        IsSuccess = true,
+            //        IsSuccess = true
             //        businessValidationRule = Common.Validation.BusinessValidationRule.Success,
             //        Errors = null
             //    };

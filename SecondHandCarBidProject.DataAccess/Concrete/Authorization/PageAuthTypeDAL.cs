@@ -24,12 +24,12 @@ namespace SecondHandCarBidProject.DataAccess.Concrete.Authorization
             using (var connection = _context.CreateConnection())
             {
                 var query = "INSERT INTO PageAuthType (AuthorizationName,IsActive) VALUES (@authorizationname,1)";
-                var parameters = new { authorizationname=pageAuthTypeAddDTO.AuthorizationName };
+                var parameters = new { authorizationname = pageAuthTypeAddDTO.AuthorizationName };
                 var data = await connection.ExecuteAsync(query, parameters);
                 ResponseModel<bool> responseModel = new ResponseModel<bool>()
                 {
                     Data = (data == 1) ? true : false,
-                    IsSuccess = true,
+                    IsSuccess = true
                 };
                 return responseModel;
             }
@@ -45,7 +45,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete.Authorization
                 ResponseModel<bool> responseModel = new ResponseModel<bool>()
                 {
                     Data = (data == 1) ? true : false,
-                    IsSuccess = true,
+                    IsSuccess = true
                 };
                 return responseModel;
             }
@@ -57,7 +57,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete.Authorization
             var parameters = new { page, itemPerPage };
             using (var connection = _context.CreateConnection())
             {
-                var data = await connection.QueryAsync<PageAuthTypeDto>(query,parameters);
+                var data = await connection.QueryAsync<PageAuthTypeDto>(query, parameters);
                 List<PageAuthTypeDto> newTableData = data.ToList();
                 int maxPage = Convert.ToInt32(await connection.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM PageAuthType"));
                 maxPage = (int)Math.Ceiling((double)maxPage / itemPerPage);
@@ -65,8 +65,8 @@ namespace SecondHandCarBidProject.DataAccess.Concrete.Authorization
                 return new ResponseModel<PageAuthTypeListDTO>()
                 {
                     Data = pageAuthTypeListDTO,
-                    IsSuccess = true,
-                    statusCode = Common.Validation.StatusCode.Success
+                    IsSuccess = true
+                    //
                 };
             }
         }
@@ -81,7 +81,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete.Authorization
                 ResponseModel<bool> responseModel = new ResponseModel<bool>()
                 {
                     Data = (data == 1) ? true : false,
-                    IsSuccess = true,
+                    IsSuccess = true
                 };
                 return responseModel;
             }

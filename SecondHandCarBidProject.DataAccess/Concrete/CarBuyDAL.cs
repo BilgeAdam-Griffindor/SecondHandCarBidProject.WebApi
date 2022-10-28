@@ -47,40 +47,40 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     List<IdNameListDTO> corporationList = corporationResult.ToList();
 
                     //var bodyQuery = @"DECLARE @typeId uniqueidentifier = (SELECT TOP 1 Id FROM CarPropertyValue WHERE PropertyValue = 'BodyType')
-	                   // SELECT Id, PropertyValue as Name FROM CarPropertyValue WHERE TopPropertyValueId = @typeId";
+                    // SELECT Id, PropertyValue as Name FROM CarPropertyValue WHERE TopPropertyValueId = @typeId";
                     //var bodyResult = await connection.QueryAsync<IdNameListDTO>(bodyQuery);
                     //List<IdNameListDTO> bodyList = bodyResult.ToList();
 
                     //var fuelQuery = @"DECLARE @typeId uniqueidentifier = (SELECT TOP 1 Id FROM CarPropertyValue WHERE PropertyValue = 'FuelType')
-	                   // SELECT Id, PropertyValue as Name FROM CarPropertyValue WHERE TopPropertyValueId = @typeId";
+                    // SELECT Id, PropertyValue as Name FROM CarPropertyValue WHERE TopPropertyValueId = @typeId";
                     //var fuelResult = await connection.QueryAsync<IdNameListDTO>(fuelQuery);
                     //List<IdNameListDTO> fuelList = fuelResult.ToList();
 
                     //var gearQuery = @"DECLARE @typeId uniqueidentifier = (SELECT TOP 1 Id FROM CarPropertyValue WHERE PropertyValue = 'GearType')
-	                   // SELECT Id, PropertyValue as Name FROM CarPropertyValue WHERE TopPropertyValueId = @typeId";
+                    // SELECT Id, PropertyValue as Name FROM CarPropertyValue WHERE TopPropertyValueId = @typeId";
                     //var gearResult = await connection.QueryAsync<IdNameListDTO>(gearQuery);
                     //List<IdNameListDTO> gearList = gearResult.ToList();
 
                     //var versionQuery = @"DECLARE @typeId uniqueidentifier = (SELECT TOP 1 Id FROM CarPropertyValue WHERE PropertyValue = 'Version')
-	                   // SELECT Id, PropertyValue as Name FROM CarPropertyValue WHERE TopPropertyValueId = @typeId";
+                    // SELECT Id, PropertyValue as Name FROM CarPropertyValue WHERE TopPropertyValueId = @typeId";
                     //var versionResult = await connection.QueryAsync<IdNameListDTO>(versionQuery);
                     //List<IdNameListDTO> versionList = versionResult.ToList();
 
                     //var colorQuery = @"DECLARE @typeId uniqueidentifier = (SELECT TOP 1 Id FROM CarPropertyValue WHERE PropertyValue = 'Color')
-	                   // SELECT Id, PropertyValue as Name FROM CarPropertyValue WHERE TopPropertyValueId = @typeId";
+                    // SELECT Id, PropertyValue as Name FROM CarPropertyValue WHERE TopPropertyValueId = @typeId";
                     //var colorResult = await connection.QueryAsync<IdNameListDTO>(colorQuery);
                     //List<IdNameListDTO> colorList = colorResult.ToList();
 
                     //var optionalHardwareQuery = @"DECLARE @typeId uniqueidentifier = (SELECT TOP 1 Id FROM CarPropertyValue WHERE PropertyValue = 'OptionalHardware')
-	                   // SELECT Id, PropertyValue as Name FROM CarPropertyValue WHERE TopPropertyValueId = @typeId";
+                    // SELECT Id, PropertyValue as Name FROM CarPropertyValue WHERE TopPropertyValueId = @typeId";
                     //var optionalHardwareResult = await connection.QueryAsync<IdNameListDTO>(optionalHardwareQuery);
                     //List<IdNameListDTO> optionalHardwareList = optionalHardwareResult.ToList();
 
                     CarDetailAddPageDTO responseDTO = new CarDetailAddPageDTO(
-                        brandList, 
-                        modelList, 
-                        statusValueList, 
-                        corporationList, 
+                        brandList,
+                        modelList,
+                        statusValueList,
+                        corporationList,
                         CarPropertyListByType(connection, "BodyType").Result,
                         CarPropertyListByType(connection, "FuelType").Result,
                         CarPropertyListByType(connection, "GearType").Result,
@@ -91,8 +91,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<CarDetailAddPageDTO>()
                     {
                         Data = responseDTO,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -107,7 +106,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = new CarDetailAddPageDTO(new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>()),
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
                 };
             }
@@ -160,7 +158,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 fullPropertyList.AddRange(dto.OptionalHardwareIds);
 
                 //TODO Remove unnecesary values, fix statusId
-                var parameters = new { price = 0, kilometre = dto.Kilometre, carYear = dto.CarYear, isCorporate = false, carDescription = dto.CarDescription, brandId = dto.CarBrandId, modelId = dto.CarModelId, statusId = 14, propertyList = fullPropertyList, pictures = dto.CarImages, createdBy = dto.CreatedBy};
+                var parameters = new { price = 0, kilometre = dto.Kilometre, carYear = dto.CarYear, isCorporate = false, carDescription = dto.CarDescription, brandId = dto.CarBrandId, modelId = dto.CarModelId, statusId = 14, propertyList = fullPropertyList, pictures = dto.CarImages, createdBy = dto.CreatedBy };
 
                 using (var connection = _context.CreateConnection())
                 {
@@ -169,8 +167,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<bool>()
                     {
                         Data = result > 0,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -185,7 +182,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = false,
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
                 };
             }
@@ -215,8 +211,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<bool>()
                     {
                         Data = result > 0,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -231,7 +226,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = false,
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
                 };
             }
@@ -281,8 +275,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<CarBuyListPageDTO>()
                     {
                         Data = responseDTO,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -297,7 +290,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = new CarBuyListPageDTO(new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<CarBuyListTableRowDTO>(), 0),
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
                 };
             }
@@ -321,26 +313,26 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                         AND cb.Id = @id";
                     var parameters = new { id = id };
                     var initialInfo = (from info in connection.Query(query, parameters)
-                                      group info by info.Id into grp
-                                      select new CarBuyUpdatePageMainInfoDTO(
-                                          new Guid(grp.Key),
-                                          grp.Select(x => new Guid(x.Id)).FirstOrDefault(),
-                                          grp.Select(x => Convert.ToString(x.Username)).FirstOrDefault(),
-                                          grp.Select(x => Convert.ToDecimal(x.PrevaluationPrice)).FirstOrDefault(),
-                                          grp.Select(x => Convert.ToDecimal(x.BidPrice)).FirstOrDefault(),
-                                          grp.Select(x => Convert.ToInt32(x.Kilometre)).FirstOrDefault(),
-                                          grp.Select(x => Convert.ToInt16(x.CarYear)).FirstOrDefault(),
-                                          grp.Select(x => Convert.ToString(x.CarDescription)).FirstOrDefault(),
-                                          grp.Select(x => Convert.ToInt16(x.CarBrandId)).FirstOrDefault(),
-                                          grp.Select(x => Convert.ToInt32(x.CarModelId)).FirstOrDefault(),
-                                          grp.Select(x => Convert.ToInt32(x.StatusValueId)).FirstOrDefault(),
-                                          grp.Where(x => x.TopProperty == "BodyType").Select(x => new Guid(x.CarPropertyValueId)).FirstOrDefault(),
-                                          grp.Where(x => x.TopProperty == "FuelType").Select(x => new Guid(x.CarPropertyValueId)).FirstOrDefault(),
-                                          grp.Where(x => x.TopProperty == "GearType").Select(x => new Guid(x.CarPropertyValueId)).FirstOrDefault(),
-                                          grp.Where(x => x.TopProperty == "Version").Select(x => new Guid(x.CarPropertyValueId)).FirstOrDefault(),
-                                          grp.Where(x => x.TopProperty == "Color").Select(x => new Guid(x.CarPropertyValueId)).FirstOrDefault(),
-                                          grp.Where(x => x.TopProperty == "OptionalHardware").Select(x => new Guid(x.CarPropertyValueId)).ToList()
-                                          )).FirstOrDefault();
+                                       group info by info.Id into grp
+                                       select new CarBuyUpdatePageMainInfoDTO(
+                                           new Guid(grp.Key),
+                                           grp.Select(x => new Guid(x.Id)).FirstOrDefault(),
+                                           grp.Select(x => Convert.ToString(x.Username)).FirstOrDefault(),
+                                           grp.Select(x => Convert.ToDecimal(x.PrevaluationPrice)).FirstOrDefault(),
+                                           grp.Select(x => Convert.ToDecimal(x.BidPrice)).FirstOrDefault(),
+                                           grp.Select(x => Convert.ToInt32(x.Kilometre)).FirstOrDefault(),
+                                           grp.Select(x => Convert.ToInt16(x.CarYear)).FirstOrDefault(),
+                                           grp.Select(x => Convert.ToString(x.CarDescription)).FirstOrDefault(),
+                                           grp.Select(x => Convert.ToInt16(x.CarBrandId)).FirstOrDefault(),
+                                           grp.Select(x => Convert.ToInt32(x.CarModelId)).FirstOrDefault(),
+                                           grp.Select(x => Convert.ToInt32(x.StatusValueId)).FirstOrDefault(),
+                                           grp.Where(x => x.TopProperty == "BodyType").Select(x => new Guid(x.CarPropertyValueId)).FirstOrDefault(),
+                                           grp.Where(x => x.TopProperty == "FuelType").Select(x => new Guid(x.CarPropertyValueId)).FirstOrDefault(),
+                                           grp.Where(x => x.TopProperty == "GearType").Select(x => new Guid(x.CarPropertyValueId)).FirstOrDefault(),
+                                           grp.Where(x => x.TopProperty == "Version").Select(x => new Guid(x.CarPropertyValueId)).FirstOrDefault(),
+                                           grp.Where(x => x.TopProperty == "Color").Select(x => new Guid(x.CarPropertyValueId)).FirstOrDefault(),
+                                           grp.Where(x => x.TopProperty == "OptionalHardware").Select(x => new Guid(x.CarPropertyValueId)).ToList()
+                                           )).FirstOrDefault();
 
                     var carImageQuery = @"select Id, CarImage as Image from CarImages where CarId=@carId";
                     var carImageParam = new { carId = initialInfo.CarId };
@@ -391,8 +383,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<CarBuyUpdatePageDTO>()
                     {
                         Data = responseDTO,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -407,7 +398,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = new CarBuyUpdatePageDTO(Guid.Empty, Guid.Empty, "", 0, 0, 0, 0, "", 0, 0, 0, Guid.Empty, Guid.Empty, Guid.Empty, Guid.Empty, Guid.Empty, new List<Guid>(), new List<CarImageListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>(), new List<IdNameListDTO>()),
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
                 };
             }
@@ -443,8 +433,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<bool>()
                     {
                         Data = result > 0,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -459,7 +448,6 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = false,
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
                     Errors = errors
                 };
             }

@@ -41,8 +41,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<BidResultAddPageDTO>()
                     {
                         Data = responseDTO,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -57,7 +56,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = new BidResultAddPageDTO(new List<IdNameListDTO>()),
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
+
                     Errors = errors
                 };
             }
@@ -76,8 +75,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<bool>()
                     {
                         Data = result > 0,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -92,7 +90,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = false,
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
+
                     Errors = errors
                 };
             }
@@ -122,8 +120,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<bool>()
                     {
                         Data = result > 0,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -138,7 +135,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = false,
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
+
                     Errors = errors
                 };
             }
@@ -170,8 +167,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<BidResultListPageDTO>()
                     {
                         Data = responseDTO,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -186,7 +182,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = new BidResultListPageDTO(new List<BidResultListTableRowsDTO>(), 0),
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
+
                     Errors = errors
                 };
             }
@@ -206,8 +202,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<BidResultUpdatePageDTO>()
                     {
                         Data = responseDTO,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -222,7 +217,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = new BidResultUpdatePageDTO(Guid.Empty, ""),
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
+
                     Errors = errors
                 };
             }
@@ -233,7 +228,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
             try
             {
                 var query = "update BidResult set Explanation = @explanation, ModifiedBy = @modifiedBy, ModifiedDate = GETDATE() where Id = @id";
-                var parameters = new {id = dto.Id, explanation = dto.Explanation, modifiedBy = dto.ModifiedBy};
+                var parameters = new { id = dto.Id, explanation = dto.Explanation, modifiedBy = dto.ModifiedBy };
 
                 using (var connection = _context.CreateConnection())
                 {
@@ -242,8 +237,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                     return new ResponseModel<bool>()
                     {
                         Data = result > 0,
-                        IsSuccess = true,
-                        statusCode = Common.Validation.StatusCode.Success
+                        IsSuccess = true
                     };
                 }
             }
@@ -258,7 +252,7 @@ namespace SecondHandCarBidProject.DataAccess.Concrete
                 {
                     Data = false,
                     IsSuccess = false,
-                    statusCode = Common.Validation.StatusCode.TimeOut,
+
                     Errors = errors
                 };
             }
