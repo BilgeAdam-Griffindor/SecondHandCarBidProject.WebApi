@@ -44,6 +44,8 @@ namespace SecondHandCarBidProject.Business.Extensions
             services.AddScoped<IRoleTypeDAL, RoleTypeDAL>();
             services.AddScoped<IStatusTypeDAL, StatusTypeDAL>();
             services.AddScoped<IStatusValueDAL, StatusValueDAL>();
+            services.AddScoped<IBidDAL, BidDAL>();
+
         }
     }
 }
