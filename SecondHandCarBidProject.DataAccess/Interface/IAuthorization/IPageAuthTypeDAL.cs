@@ -14,8 +14,8 @@ namespace SecondHandCarBidProject.DataAccess.Interface.IAuthorization
 
         public Task<ResponseModel<bool>> AddGet(PageAuthTypeAddDTO pageAuthTypeAddDTO);
 
-        //public Task<ResponseModel<bool>> AddPost(BidCorporationAddSendDTO dto);
+        public Task<ResponseModel<bool>> Update(PageAuthTypeUpdateDTO pageAuthTypeUpdateDTO);
 
-        //public Task<ResponseModel<bool>> Delete(Guid bidId, int corporationId, Guid modifiedBy);
+        public Task<ResponseModel<bool>> Delete(Int16 id);
     }
 }

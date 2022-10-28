@@ -1,18 +1,18 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SecondHandCarBidProject.Business.Middlewares;
 using SecondHandCarBidProject.DataAccess.Concrete;
 using SecondHandCarBidProject.DataAccess.Concrete.Authorization;
+using SecondHandCarBidProject.DataAccess.Concrete.Status;
 using SecondHandCarBidProject.DataAccess.Concrete.Token;
 using SecondHandCarBidProject.DataAccess.Context;
 using SecondHandCarBidProject.DataAccess.Interface;
 using SecondHandCarBidProject.DataAccess.Interface.IAuthorization;
+using SecondHandCarBidProject.DataAccess.Interface.IStatus;
 using SecondHandCarBidProject.DataAccess.Interface.Token;
 using SecondHandCarBidProject.DataAccess.Mongo;
 using SecondHandCarBidProject.DataAccess.Mongo.Abstract;
 using SecondHandCarBidProject.DataAccess.Mongo.Concrete;
 using SecondHandCarBidProject.DataAccess.Mongo.MongoModels;
-using SecondHandCarBidProject.Log.Abstract;
 using SecondHandCarBidProject.Log.Concrete;
 using SecondHandCarBidProject.Logs.Abstract;
 using SecondHandCarBidProject.Logs.Concrete;
@@ -38,7 +38,12 @@ namespace SecondHandCarBidProject.Business.Extensions
             services.AddSingleton<IMongoEmailPasswordToken, MongoEmailPasswordToken>();
             services.AddScoped<IUserDAL, UserDAL>();
             services.AddScoped<IBidCorporationDAL, BidCorporationDAL>();
+            services.AddScoped<IAdressInfoDAL, AdressInfoDAL>();
             services.AddScoped<IPageAuthTypeDal, PageAuthTypeDAL>();
+            services.AddScoped<IRolePageActionAuthDAL, RolePageActionAuthDAL>();
+            services.AddScoped<IRoleTypeDAL, RoleTypeDAL>();
+            services.AddScoped<IStatusTypeDAL, StatusTypeDAL>();
+            services.AddScoped<IStatusValueDAL, StatusValueDAL>();
             services.AddScoped<IBidDAL, BidDAL>();
 
         }
