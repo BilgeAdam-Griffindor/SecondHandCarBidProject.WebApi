@@ -31,7 +31,6 @@
     <Folder Include="Controllers\Expert\" />
     <Folder Include="Controllers\Favorite\" />
     <Folder Include="Controllers\User\" />
-    <Folder Include="Controllers\TrafficInsurance\" />
     <Folder Include="Controllers\Notification\" />
   </ItemGroup>
 
