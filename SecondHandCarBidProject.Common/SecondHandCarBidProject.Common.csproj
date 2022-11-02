@@ -21,8 +21,6 @@
   <ItemGroup>
     <Folder Include="DTOs\UserAutoBidDTO\" />
     <Folder Include="DTOs\TrafficInsuranceTrafficInsuranceCarComponentDTO\" />
-    <Folder Include="DTOs\TrafficInsuranceCarComponentDTO\" />
-    <Folder Include="DTOs\TrafficInsuranceDTO\" />
   </ItemGroup>
 
 </Project>
