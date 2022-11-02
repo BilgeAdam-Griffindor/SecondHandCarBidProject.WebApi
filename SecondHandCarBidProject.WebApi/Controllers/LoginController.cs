@@ -20,15 +20,30 @@ namespace SecondHandCarBidProject.WebApi.Controllers
         [AllowAnonymous]
 
         [HttpPost("LoginUser")]
-        public async Task<IActionResult> Login([FromBody] TokenUserRequestDTO req)
+        public async Task<IActionResult> Login(TokenUserRequestDTO req)
 
         {
             if (req == null)
                 return BadRequest(new { message = "Kullanıcı adı veya şifre hatalı!" });
 
             var result = await _authDAL.LoginAsync(req.LoginUser, req.LoginPassword, 20);
-            if (result == null)
-                return Unauthorized();//if it is null it will return 401(Unauthorized) code
+            //if (result.IsSuccess == false)
+            //    return NoContent();
+
+            return Ok(result);
+        }
+        [AllowAnonymous]
+
+        [HttpPost("RegisterUser")]
+        public async Task<IActionResult> Register(BaseUserAddDTO user)
+
+        {
+            if (user == null)
+                return BadRequest();
+
+            var result = await _authDAL.RegisterAsync(user);
+            //if (result.IsSuccess == false)
+            //    return NoContent();
 
             return Ok(result);
         }
@@ -39,7 +54,7 @@ namespace SecondHandCarBidProject.WebApi.Controllers
             var result = await _authDAL.RefreshTokenLoginAsync(refreshToken);
             if (result == null)
                 return Unauthorized();//if it is null it will return 401(Unauthorized) code
-            
+
             return Ok(result);
         }
         [Authorize]

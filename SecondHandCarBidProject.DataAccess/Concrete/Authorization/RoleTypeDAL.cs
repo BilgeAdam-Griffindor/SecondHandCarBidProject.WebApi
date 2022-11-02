@@ -67,8 +67,8 @@ namespace SecondHandCarBidProject.DataAccess.Concrete.Authorization
                 return new ResponseModel<RoleTypeListDto>()
                 {
                     Data = roleTypeListDTO,
-                    IsSuccess = true,
-                    statusCode = Common.Validation.StatusCode.Success
+                    IsSuccess = true
+                    //statusCode = Common.Validation.StatusCode.Success
                 };
             }
         }
