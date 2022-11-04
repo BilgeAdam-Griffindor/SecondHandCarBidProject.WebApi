@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DTOs\TrafficInsuranceTrafficInsuranceCarComponentDTO\Temp\" />
     <Folder Include="DTOs\UserAutoBidDTO\" />
-    <Folder Include="DTOs\TrafficInsuranceTrafficInsuranceCarComponentDTO\" />
   </ItemGroup>
 
 </Project>
