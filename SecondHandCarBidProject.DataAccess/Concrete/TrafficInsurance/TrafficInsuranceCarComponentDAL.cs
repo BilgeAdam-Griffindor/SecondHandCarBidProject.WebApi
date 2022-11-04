@@ -20,12 +20,35 @@ namespace SecondHandCarBidProject.DataAccess.Concrete.TrafficInsurance
         }
         public async Task<ResponseModel<bool>> Add(TrafficInsuranceCarComponentAddDto trafficInsuranceCarComponentAddDto)
         {
-            throw new NotImplementedException();
+            var query = "INSERT INTO TrafficInsuranceCarComponent (ComponentName,IsActive) VALUES (@componentName,1)";
+            var parameters = new { componentName = trafficInsuranceCarComponentAddDto.ComponentName };
+            using (var connection = _context.CreateConnection())
+            {
+                var data = await connection.ExecuteAsync(query, parameters);
+                ResponseModel<bool> responseModel = new ResponseModel<bool>()
+                {
+                    Data = (data == 1) ? true : false,
+                    IsSuccess = true,
+                };
+                return responseModel;
+            }
+
         }
 
         public async Task<ResponseModel<bool>> Delete(short id)
         {
-            throw new NotImplementedException();
+            using (var connection = _context.CreateConnection())
+            {
+                var query = "UPDATE TrafficInsuranceCarComponent SET IsActive=0 WHERE Id=@id";
+                var parameters = new { id = id };
+                var data = await connection.ExecuteAsync(query, parameters);
+                ResponseModel<bool> responseModel = new ResponseModel<bool>()
+                {
+                    Data = (data == 1) ? true : false,
+                    IsSuccess = true,
+                };
+                return responseModel;
+            }
         }
 
         public async Task<ResponseModel<TrafficInsuranceCarComponentListDto>> List(int page = 1, int itemPerPage = 10)
@@ -46,15 +69,26 @@ namespace SecondHandCarBidProject.DataAccess.Concrete.TrafficInsurance
                 return new ResponseModel<TrafficInsuranceCarComponentListDto>()
                 {
                     Data = trafficInsuranceCarComponentListDto,
-                    IsSuccess=true
+                    IsSuccess = true
                 };
             }
-            
+
         }
 
         public async Task<ResponseModel<bool>> Update(TrafficInsuranceCarComponentUpdateDto trafficInsuranceCarComponentUpdateDto)
         {
-            throw new NotImplementedException();
+            var query = "UPDATE TrafficInsuranceCarComponent SET ComponentName=@componentName WHERE Id=@id";
+            var parameters = new { componentName = trafficInsuranceCarComponentUpdateDto.ComponentName, id = trafficInsuranceCarComponentUpdateDto.Id };
+            using (var connection = _context.CreateConnection())
+            {
+                var data = await connection.ExecuteAsync(query, parameters);
+                ResponseModel<bool> responseModel = new ResponseModel<bool>()
+                {
+                    Data = (data == 1) ? true : false,
+                    IsSuccess = true,
+                };
+                return responseModel;
+            }
         }
     }
 }
