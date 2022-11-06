@@ -10,7 +10,7 @@ namespace SecondHandCarBidProject.DataAccess.Interface.ITrafficInsurance
 {
     public interface ITrafficInsuranceTrafficInsuranceCarComponentDAL
     {
-        public Task<ResponseModel<TrafficInsuranceTrafficInsuranceCarComponentAddDto>> Add();
-        public Task<TrafficInsuranceTrafficInsuranceCarComponentListDto> List();
+        public Task<ResponseModel<bool>> Add(TrafficInsuranceTrafficInsuranceCarComponentAddDto titiccad);
+        public Task<ResponseModel<TrafficInsuranceTrafficInsuranceCarComponentListDto>> List(int page = 1, int itemPerPage = 10);
     }
 }
