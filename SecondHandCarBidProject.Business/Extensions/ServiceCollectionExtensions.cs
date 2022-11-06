@@ -50,6 +50,7 @@ namespace SecondHandCarBidProject.Business.Extensions
 
             services.AddScoped<ITrafficInsuranceDAL, TrafficInsuranceDAL>();
             services.AddScoped<ITrafficInsuranceCarComponentDAL, TrafficInsuranceCarComponentDAL>();
+            services.AddScoped<ITrafficInsuranceTrafficInsuranceCarComponentDAL, TrafficInsuranceTrafficInsuranceCarComponentDAL>();
         }
     }
 }
